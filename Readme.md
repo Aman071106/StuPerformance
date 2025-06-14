@@ -24,6 +24,33 @@ CarPricePrediction/
 ├── LICENCE           
 ├── README.md
 ├── src/
-│   └── carprice/        ← Your actual Python package
+│   └──__init__.py
+
+
+
+Part 2)Project structure setup with exception,logging,utils,components
+CarPricePrediction/
+├── pyproject.toml   (for newer pips as -e . will break down)   
+├── setup.py            
+├── requirements.txt
+├── .gitignore
+├── LICENCE           
+├── README.md
+├── src/
+│   └──__init__.py
+│   ├── exception.py
+│   ├── logger.py
+│   ├── utils.py
+│   └── components/      
 │       ├── __init__.py
-│       └── model.py
+│       └── data_ingestion.py
+│       └── data_transformation.py
+│       └── model_trainer.py
+│   └── components/       
+│       ├── __init__.py
+│       └── predict_pipeline.py
+│       └── train_pipeline.py
+│
+
+
+

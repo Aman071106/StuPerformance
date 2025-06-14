@@ -3,6 +3,9 @@ from setuptools import find_packages, setup
 APP_NAME = 'CarPrice'
 
 def get_requirements(filename):
+    """
+    This function returns a list of requirements from requirements.txt file.
+    """
     with open(filename) as f:
         return [line.strip() for line in f if line.strip() and not line.startswith(('#','-'))]
 
