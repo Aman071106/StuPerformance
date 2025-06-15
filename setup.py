@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-APP_NAME = 'CarPrice'
+APP_NAME = 'Student Prediction'
 
 def get_requirements(filename):
     """

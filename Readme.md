@@ -1,4 +1,4 @@
-# **CarPrice🚗 prediction model for learning End to end ML implementation 🤖**
+# **Student performance prediction model for learning End to end ML implementation 🤖**
 
 This project will be based on a generic ml project structure that can be used in ml/dl etc.
 
@@ -53,6 +53,13 @@ CarPricePrediction/
 │   └── test.py
 
 Testing done after and in between each part in test.py
+
+Part3)
+EDA model training and fe etc
+
+These things are bst to do in jupyter notebook first in an organized manner then w replicate same code in modular way.
+For everything in project there should be a reason
+We show the eda n model_training to the stake holder
 
 
 
