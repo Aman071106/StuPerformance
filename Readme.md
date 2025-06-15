@@ -50,7 +50,9 @@ CarPricePrediction/
 │       ├── __init__.py
 │       └── predict_pipeline.py
 │       └── train_pipeline.py
-│
+│   └── test.py
+
+Testing done after and in between each part in test.py
 
 
 
