@@ -3,4 +3,7 @@ matplotlib
 seaborn
 pandas
 plotly 
+ipykernel
+dataclasses
+scikit-learn
 -e .

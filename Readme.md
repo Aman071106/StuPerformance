@@ -63,3 +63,10 @@ We show the eda n model_training to the stake holder
 
 
 
+First we creat a basic model then improve the model
+
+Part4)Implement data ingestion
+When to use dataclass decorator --when there is only class attributes
+add to git ignore
+# Environments
+.artifacts
