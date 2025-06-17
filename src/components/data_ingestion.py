@@ -9,6 +9,8 @@ from dataclasses import dataclass
 
 from sklearn.model_selection import train_test_split
 
+# Main function imports
+from src.components.data_transformation import DataTransformation
 # logger.info("Checking imports in ingestion file")
 
 @dataclass
@@ -69,3 +71,8 @@ class DataIngestion:
 if __name__ in "__main__":
     dataIngestion=DataIngestion()
     train_path,test_path=dataIngestion.initaiate_data_ingestion()
+    
+    # Data transformation
+    dataTransformer=DataTransformation()
+    # preprocessor=dataTransformer.get_preprocessor(train_path=train_path,test_path=test_path)
+    train_arr,test_arr,preprocessor_path=dataTransformer.transform_data(train_path=train_path,test_path=test_path)

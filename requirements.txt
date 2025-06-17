@@ -6,4 +6,7 @@ plotly
 ipykernel
 dataclasses
 scikit-learn
+catboost
+xgboost
+dill
 -e .
