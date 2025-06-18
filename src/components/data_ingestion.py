@@ -11,6 +11,7 @@ from sklearn.model_selection import train_test_split
 
 # Main function imports
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 # logger.info("Checking imports in ingestion file")
 
 @dataclass
@@ -76,3 +77,8 @@ if __name__ in "__main__":
     dataTransformer=DataTransformation()
     # preprocessor=dataTransformer.get_preprocessor(train_path=train_path,test_path=test_path)
     train_arr,test_arr,preprocessor_path=dataTransformer.transform_data(train_path=train_path,test_path=test_path)
+    
+    # Model Training
+    modelTrainer=ModelTrainer()
+    r2_score,pkl_path=modelTrainer.initiate_model_training(test_transformed=test_arr,train_transformed=train_arr)
+    
