@@ -8,7 +8,7 @@ from src.logger import logger
 import dill
 
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error, root_mean_squared_error
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score,GridSearchCV
 
 
 def save_pkl(file_path, pkl_obj):
@@ -29,7 +29,7 @@ def save_pkl(file_path, pkl_obj):
         raise AppException(e, sys)
 
 
-def evaluate_model(modelDict, X_train, X_test, y_train, y_test):
+def evaluate_model(modelDict, X_train, X_test, y_train, y_test,paramDictList):
     """
         This function train and return report of model.
     """
@@ -39,7 +39,14 @@ def evaluate_model(modelDict, X_train, X_test, y_train, y_test):
         modelList = list(modelDict.keys())
         for modelname in modelList:
             model = modelDict[modelname]
-            model.fit(X_train, y_train)
+            
+            gs=GridSearchCV(model,param_grid=paramDictList[modelname],cv=5)
+            gs.fit(X_train, y_train)
+            model=gs.best_estimator_
+            # #or 
+            # model.set_params(**gs.best_params_)
+            # model.fit(X_train,y_train)  
+            
             y_pred = model.predict(X_test)
             y_pred_train = model.predict(X_train)
             cv_score = cross_val_score(
