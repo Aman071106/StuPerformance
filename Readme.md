@@ -75,3 +75,17 @@ add to git ignore
 Part 5)Data transformation.py
 folder structure same
 utils use also seen like pkl file saving
+
+Part6) model_trainer.py
+also seen hyperparameter tuning and custom error in appexception
+
+Important point error :
+-when we save a model/transfoemer etc and we get a log saving RnadomForestRegressor() empty brackets it means new instance is being saved or no training has occured , so keep in mind to pass the trained model or processor in pkl path instead of a new instance
+
+Part7) predict_pipeline.py and Flask backend and streamlit frontend
+StuPrediction/
+-appBackend/
+endpoints.py
+-appFrontend/
+app.py
+rest structure remains same

@@ -73,27 +73,25 @@ class ModelTrainer:
                                                  :-1], train_transformed[:, -1]
             X_test, y_test = test_transformed[:, :-1], test_transformed[:, -1]
             logger.info("Split successful -Getting model report")
-            report = evaluate_model(modelDict=self.model_dict, X_test=X_test, X_train=X_train,
-                                    y_test=y_test, y_train=y_train, paramDictList=self.paramDictList)
-            logger.info(f"🗒️Report:\n{report}")
-            # Selecting based on r2_score
-            max_r2_score = 0
-            for modelInfo in list(report.values()):
-                max_r2_score = max(max_r2_score, modelInfo['test']['r2_score'])
+            report, best_model_name, best_model = evaluate_model(
+                modelDict=self.model_dict, X_test=X_test, X_train=X_train,
+                y_test=y_test, y_train=y_train, paramDictList=self.paramDictList
+            )
 
-            if (max_r2_score < 0.6):
-                raise AppException(
-                    "Model performance very less excpetion", sys)
-            logger.info(f"Model found with r2_score:{max_r2_score}")
-            bestModelName = None
-            for model_name, metrics in report.items():
-                if metrics['test']['r2_score'] == max_r2_score:
-                    bestModelName = model_name
-                    break
-            model = self.model_dict[model_name]
-            logger.info(f"Best model: {model_name}--Saving pickle")
+            logger.info(f"🗒️Report:\n{report}")
+
+            max_r2_score = report[best_model_name]['test']['r2_score']
+            if max_r2_score < 0.6:
+                raise AppException("Model performance very less exception", sys)
+
+            logger.info(f"Model found with r2_score: {max_r2_score}")
+            logger.info(f"Best model: {best_model_name} -- Saving pickle")
+
             save_pkl(
-                file_path=self.model_trainer_config.model_pkl_path, pkl_obj=model)
+                file_path=self.model_trainer_config.model_pkl_path,
+                pkl_obj=best_model
+            )
+
             logger.info("Model Training successful")
             return (max_r2_score, self.model_trainer_config.model_pkl_path)
 
