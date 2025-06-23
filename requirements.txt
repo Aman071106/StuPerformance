@@ -3,12 +3,10 @@ matplotlib
 seaborn
 pandas
 plotly 
-ipykernel
 dataclasses
 scikit-learn
 catboost
 xgboost
 dill
 flask
-streamlit
 -e .
