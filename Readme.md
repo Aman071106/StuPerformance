@@ -115,6 +115,7 @@ StuPrediction/
 > **Repository contains multiple deployment setups to learn different strategies.**
 
 ### a) AWS Elastic Beanstalk Deployment
+**Note:You’ve correctly granted broad permissions (though ideally not recommended for production), so the pipeline should now have enough access to AWS services.This means we have given all permissions in code pipeline in this deployment which is generally not recommmended. We should create custom inline policies and give permissions as error occured**
 
 #### IAM Overview
 
