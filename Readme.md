@@ -1,191 +1,228 @@
-# **Student performance prediction model for learning End to end ML implementation 🤖**
+# ✨ Student Performance Prediction Model: End-to-End ML Implementation 🤖
 
-This project will be based on a generic ml project structure that can be used in ml/dl etc.
+This project demonstrates a full machine learning pipeline, including modular structure, EDA, model building, and AWS deployment using Elastic Beanstalk and CI/CD with CodePipeline.
 
+---
 
-Steps)
-# Installation types setup
-1)Git{Repository} setup
-    # Setting  up a new env(conda)
-Note:
-    If you create a conda env inside vscode inside a specific repo we will get that folder there and can see it from here but if we created the env somewhere else(generally in anaconda3/envs) then that same folder will be present there.
-2)requirements.txt
-3)setup.py
-4)gitignore with template in github
+## ✅ Installation and Environment Setup
 
-For above process and many other such processes/steps there are also automated ways but we will learn them later first by learnign basics
+### 1. Git Repository Setup
 
-Current state
-CarPricePrediction/
-├── pyproject.toml   (for newer pips as -e . will break down)   
-├── setup.py            
+* Clone the repository.
+* Set up a new Conda environment (recommended inside VSCode for ease of visibility).
+
+### 2. Required Files
+
+* `requirements.txt`
+* `setup.py`
+* `.gitignore` (based on GitHub Python template)
+
+> Note: If `-e .` fails with `setup.py`, use `pyproject.toml` for newer pip versions.
+
+---
+
+## 📁 Initial Project Structure
+
+```
+StuperformancePrediction/
+├── pyproject.toml
+├── setup.py
 ├── requirements.txt
 ├── .gitignore
-├── LICENCE           
+├── LICENCE
 ├── README.md
 ├── src/
-│   └──__init__.py
+│   └── __init__.py
+```
 
+---
 
+## 📂 Project Modules and Utilities
 
-Part 2)Project structure setup with exception,logging,utils,components
-CarPricePrediction/
-├── pyproject.toml   (for newer pips as -e . will break down)   
-├── setup.py            
-├── requirements.txt
-├── .gitignore
-├── LICENCE           
-├── README.md
+### Structure:
+
+```
+StuPrediction/
 ├── src/
-│   └──__init__.py
+│   ├── __init__.py
 │   ├── exception.py
 │   ├── logger.py
 │   ├── utils.py
-│   └── components/      
-│       ├── __init__.py
-│       └── data_ingestion.py
-│       └── data_transformation.py
-│       └── model_trainer.py
-│   └── components/       
-│       ├── __init__.py
-│       └── predict_pipeline.py
-│       └── train_pipeline.py
+│   ├── components/
+│   │   ├── __init__.py
+│   │   ├── data_ingestion.py
+│   │   ├── data_transformation.py
+│   │   ├── model_trainer.py
+│   │   ├── predict_pipeline.py
+│   │   ├── train_pipeline.py
 │   └── test.py
+```
 
-Testing done after and in between each part in test.py
+### Testing
 
-Part3)
-EDA model training and fe etc
+* `test.py` is used to verify each module individually during development.
 
-These things are bst to do in jupyter notebook first in an organized manner then w replicate same code in modular way.
-For everything in project there should be a reason
-We show the eda n model_training to the stake holder
+---
 
+## 📊 EDA & Model Training
 
+* Best done inside a Jupyter Notebook.
+* Use visualizations to show EDA and model insights to stakeholders.
 
-First we creat a basic model then improve the model
+---
 
-Part4)Implement data ingestion
-When to use dataclass decorator --when there is only class attributes
-add to git ignore
-# Environments
-.artifacts
+## ✍️ Data Ingestion
 
+* Implemented using `@dataclass` when appropriate.
+* Add `.artifacts` and `.envs` folders to `.gitignore`.
 
-Part 5)Data transformation.py
-folder structure same
-utils use also seen like pkl file saving
+---
 
-Part6) model_trainer.py
-also seen hyperparameter tuning and custom error in appexception
+## 🔄 Data Transformation
 
-Important point error :
--when we save a model/transfoemer etc and we get a log saving RnadomForestRegressor() empty brackets it means new instance is being saved or no training has occured , so keep in mind to pass the trained model or processor in pkl path instead of a new instance
+* Implement transformations inside `data_transformation.py`.
+* Save pipelines using `joblib` or `pickle` via utility functions.
 
-Part7) predict_pipeline.py and Flask backend and streamlit frontend
+---
+
+## 🔧 Model Training
+
+* Use `RandomizedSearchCV` or `GridSearchCV` for tuning.
+* Always save the **trained model**, not a fresh untrained instance.
+
+---
+
+## 🛍️ Prediction Pipeline + UI
+
+### Backend (Flask): `endpoints.py`
+
+### Frontend (Streamlit): `app.py`
+
+Directory:
+
+```
 StuPrediction/
--appBackend/
-endpoints.py
--appFrontend/
-app.py
-rest structure remains same
+├── appBackend/
+│   └── endpoints.py
+├── appFrontend/
+│   └── app.py
+```
 
+---
 
-Part 8) Deployment
-Note: my repo contains multiple apps for same purpose to show different deployment techniques
-Techniques learnt(Creation of pipelines in deployment)
-a) AWS deployment (beanstalk)
-ref: https://www.udemy.com/course/complete-machine-learning-nlp-bootcamp-mlops-deployment/learn/lecture/44058702#overview
-//
-In AWS, IAM user and root user are very different in terms of their purpose, scope, and security implications.
+## 🏙️ Deployment
 
-🔐 Root User
-What it is: The root user is the AWS account owner — the identity that was used to create the AWS account.
+> **Repository contains multiple deployment setups to learn different strategies.**
 
-Permissions: Has unrestricted access to all resources and services in the account.
+### a) AWS Elastic Beanstalk Deployment
 
-Use cases:
+#### IAM Overview
 
-Setting up billing and payment info
+| User Type | Permissions                            |
+| --------- | -------------------------------------- |
+| **Root**  | Full account access. Use sparingly.    |
+| **IAM**   | Restricted. Use for daily development. |
 
-Creating the first IAM user
+### Security Best Practices
 
-Changing account settings (e.g., close account, modify support plan)
+* Enable MFA
+* Set budget alerts
+* Monitor Free Tier usage
 
-Managing root MFA settings
+### AWS Setup Steps
 
-Security best practice:
-✅ Use only when absolutely necessary
-❌ Do not use it for daily tasks
-✅ Enable MFA (multi-factor authentication)
+1. Create an AWS account
+2. Link billing method
+3. Install EB CLI or use AWS Console
 
-👤 IAM User (Identity and Access Management User)
-What it is: A user created under the AWS account using IAM to manage access and permissions.
+### Project Structure (for Beanstalk Flask)
 
-Permissions: Only has the permissions explicitly granted via IAM policies.
-
-Use cases:
-
-Regular development, administration, and operational tasks
-
-Assigning roles, groups, and granular permissions
-
-Used for multi-user access control
-
-Best practice:
-✅ Create an IAM user for each individual
-✅ Assign least privilege principle — only what they need
-✅ Use groups and roles to manage permissions efficiently
-🛡️ Best Practices to Stay Safe
-Tip	Why It Helps
-Set a billing budget	Email alerts when spending crosses limits
-Monitor Free Tier usage monthly	Spot services that may start charging
-Enable billing alerts	Activates CloudWatch usage tracking
-Delete unused resources	Prevent background charges
-Use AWS Cost Explorer	Understand where money is going
-
-
--first create a aws account on [site](https://aws.amazon.com/) and link your credit or debit card
--requires two configuration files   (python.config and .ebextensions)
-
-- diagram:
-box(github repo)->connected to below box
-box(elasticbeanstalk- An instance of cloud env type thing(linux machine here) present in aws)
-
-now the connection is a pipeline to push code,artifacts etc to the elasticbeanstalk instance
-We will use codepipeline in aws , as we press deploy button in our cloud macchine it the latest code will be deployed to it through the pipeline
-This pipeline is called continuous delivery pipeline
-
-Note: direct github(without docker) to elasticBeanStalk deplooyment will work ony  for single application.py file that shoudl be WSGI Based like flask or fast not streamlit otherwise we need to use docker.
-So the first method will work for single application.py file.
-like this
+```
 StuPrediction/
-├── application.py            # Flask entry point (renamed from app.py)
+├── application.py        # Flask Entry Point
 ├── requirements.txt
 ├── templates/
 │   └── index.html
 ├── static/
 │   └── style.css
 ├── src/
-│   ├── pipelines/
-│   │   └── predict_pipeline.py
-│   ├── logger.py
-│   ├── exception.py
-also do
-application = Flask(__name__)
-app=application
-like this
-Steps:
-1)config files and git push
-2)aws instance of elasticbeanstalk
-3)code pipeline
-
-- config files:
-#### .ebsextensions folder
-contains the python.config file
-
-```bash
-option_settings:
-    "aws:elasticbeanstalk:container:python":
-        WSGIPath: application:application
+│   └── pipelines/
+│       └── predict_pipeline.py
 ```
+
+Inside `application.py`:
+
+```python
+application = Flask(__name__)
+app = application
+```
+
+### .ebextensions/python.config
+
+```yaml
+option_settings:
+  "aws:elasticbeanstalk:container:python":
+    WSGIPath: application:application
+```
+
+---
+
+## 🚀 Elastic Beanstalk Roles (via IAM)
+
+### 1. `aws-elasticbeanstalk-service-role`
+
+* **Trusted Entity:** Elastic Beanstalk
+* **Policies:**
+
+  * `AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy`
+  * `AWSElasticBeanstalkService`
+
+### 2. `aws-elasticbeanstalk-ec2-role`
+
+* **Trusted Entity:** EC2
+* **Policies:**
+
+  * `AWSElasticBeanstalkWebTier`
+  * `AWSElasticBeanstalkWorkerTier`
+  * `AWSElasticBeanstalkMulticontainerDocker`
+
+Assign these roles in EB under `Configuration → Security`.
+
+---
+
+## 📦 CodePipeline for CD (Continuous delivery)
+
+### Source: GitHub (OAuth)
+
+> Skipping build/test stages is fine for now.
+
+### Execution Modes:
+
+| Mode       | Behavior                | Use Case                      |
+| ---------- | ----------------------- | ----------------------------- |
+| Superseded | Cancels previous builds | ✅ Recommended for web apps    |
+| Queued     | Runs sequentially       | For builds that must complete |
+| Parallel   | All in parallel         | For stateless microservices   |
+
+### Why Superseded?
+
+You’re deploying a **single app**, so only latest commit matters.
+
+---
+
+## 🔐 Common Permissions Fixes
+
+* For `cloudformation:GetTemplate` error: add inline policy with CloudFormation read access.
+* For `S3 bucket access`: ensure EB has permission to read/write to the deployment bucket.
+
+---
+
+## 💡 Tips
+
+* Use logs from EB → Logs → Full logs to debug deployment errors.
+* If using Streamlit or other non-WSGI, prefer Docker + ECR + EB.
+* Commit and push → Release change on CodePipeline → Auto deploy
+
+---
+
+Happy Learning and Deploying ✨
