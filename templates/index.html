@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Performance Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>🎓 Student Performance Predictor</h2>
+
+    <form method="POST" action="/predict">
+        <label>Gender:</label>
+        <select name="gender">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+        </select><br>
+
+        <label>Race/Ethnicity:</label>
+        <select name="race_ethnicity">
+            <option value="group A">Group A</option>
+            <option value="group B">Group B</option>
+            <option value="group C">Group C</option>
+            <option value="group D">Group D</option>
+            <option value="group E">Group E</option>
+        </select><br>
+
+        <label>Parental Level of Education:</label>
+        <select name="parental_level_of_education">
+            <option value="bachelor's degree">Bachelor's</option>
+            <option value="some college">Some College</option>
+            <option value="master's degree">Master's</option>
+            <option value="associate's degree">Associate's</option>
+            <option value="high school">High School</option>
+            <option value="some high school">Some High School</option>
+        </select><br>
+
+        <label>Lunch Type:</label>
+        <select name="lunch">
+            <option value="standard">Standard</option>
+            <option value="free/reduced">Free/Reduced</option>
+        </select><br>
+
+        <label>Test Preparation Course:</label>
+        <select name="test_preparation_course">
+            <option value="none">None</option>
+            <option value="completed">Completed</option>
+        </select><br>
+
+        <label>Reading Score:</label>
+        <input type="number" name="reading_score" min="0" max="100" required><br>
+
+        <label>Writing Score:</label>
+        <input type="number" name="writing_score" min="0" max="100" required><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h3>✅ Predicted Value: {{ prediction }}</h3>
+    {% endif %}
+</body>
+</html>
