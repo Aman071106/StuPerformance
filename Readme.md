@@ -215,7 +215,25 @@ You’re deploying a **single app**, so only latest commit matters.
 
 * For `cloudformation:GetTemplate` error: add inline policy with CloudFormation read access.
 * For `S3 bucket access`: ensure EB has permission to read/write to the deployment bucket.
-
+* Custom permission json for codepipeline:
+```bash
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"cloudformation:*",
+				"s3:*",
+				"ec2:*",
+				"autoscaling:*",
+				"elasticbeanstalk:*"
+			],
+			"Resource": "*"
+		}
+	]
+}
+```
 ---
 
 ## 💡 Tips
